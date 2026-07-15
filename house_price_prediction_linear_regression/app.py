@@ -1,7 +1,7 @@
 import streamlit as st
 import joblib
 import pandas as pd
-import pickle
+import os
 
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(
@@ -11,8 +11,8 @@ st.set_page_config(
 )
 
 # ---------------- LOAD MODEL ----------------
-model = joblib.load("model.pkl")
-# model = pickle.load(open("model.pkl","rb"))
+model_path = os.path.join(os.path.dirname(__file__), "model.pkl")
+model = joblib.load(model_path)
 
 # ---------------- HEADER ----------------
 st.markdown("""
@@ -119,3 +119,4 @@ if st.button("Predict Price"):
         <h1>₹ {predicted_price:,.0f}</h1>
     </div>
     """, unsafe_allow_html=True)
+
