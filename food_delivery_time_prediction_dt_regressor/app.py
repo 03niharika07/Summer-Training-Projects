@@ -1,10 +1,12 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import os
 
 
 # Load Model
-model = joblib.load("decision.pkl")
+model_path = os.path.join(os.path.dirname(__file__), "decision.pkl")
+model = joblib.load(model_path)
 
 
 # Page Configuration

@@ -1,7 +1,7 @@
 import streamlit as st
 import joblib
 import pandas as pd
-
+import os
 
 # ---------------- CONFIG ----------------
 
@@ -11,8 +11,8 @@ st.set_page_config(
     layout="wide"
 )
 
-
-model = joblib.load("random.pkl")
+model_path = os.path.join(os.path.dirname(__file__), "random.pkl")
+model = joblib.load(model_path)
 
 
 # ---------------- STYLE ----------------

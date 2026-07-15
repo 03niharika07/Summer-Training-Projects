@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import os
 
 
 # ---------------- PAGE CONFIG ----------------
@@ -12,7 +13,8 @@ st.set_page_config(
 
 
 # ---------------- LOAD MODEL ----------------
-model = joblib.load("classifier.pkl")
+model_path = os.path.join(os.path.dirname(__file__), "classifier.pkl")
+model = joblib.load(model_path)
 
 
 # ---------------- HEADER ----------------
