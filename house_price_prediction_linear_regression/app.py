@@ -12,7 +12,7 @@ st.set_page_config(
 
 # ---------------- LOAD MODEL ----------------
 model = joblib.load("model.pkl")
-model = pickle.load(open("model.pkl","rb"))
+model = pickle.load(open("model.pkl","wb"))
 
 # ---------------- HEADER ----------------
 st.markdown("""
