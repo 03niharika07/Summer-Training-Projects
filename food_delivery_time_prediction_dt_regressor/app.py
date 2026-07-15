@@ -5,8 +5,8 @@ import os
 
 
 # Load Model
-model_path = os.path.join(os.path.dirname(__file__), "decision.pkl")
-model = joblib.load(model_path)
+path = os.path.join(os.path.dirname(__file__), "decision.pkl")
+model = joblib.load(path)
 
 
 # Page Configuration
