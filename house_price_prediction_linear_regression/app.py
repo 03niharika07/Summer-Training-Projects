@@ -1,6 +1,7 @@
 import streamlit as st
 import joblib
 import pandas as pd
+import pickle
 
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(
@@ -11,6 +12,7 @@ st.set_page_config(
 
 # ---------------- LOAD MODEL ----------------
 model = joblib.load("model.pkl")
+model = pickle.load(open("model.pkl","rb"))
 
 # ---------------- HEADER ----------------
 st.markdown("""
