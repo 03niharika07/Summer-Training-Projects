@@ -4,7 +4,7 @@ import joblib
 
 
 # Load Model
-model = joblib.load("model.pkl")
+model = joblib.load("decision.pkl")
 
 
 # Page Configuration

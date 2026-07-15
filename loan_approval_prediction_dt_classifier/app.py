@@ -12,7 +12,7 @@ st.set_page_config(
 
 
 # ---------------- LOAD MODEL ----------------
-model = joblib.load("Model.pkl")
+model = joblib.load("classifier.pkl")
 
 
 # ---------------- HEADER ----------------

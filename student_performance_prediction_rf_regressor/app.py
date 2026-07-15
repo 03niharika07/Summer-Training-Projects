@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 
-model = joblib.load("Model.pkl")
+model = joblib.load("random.pkl")
 
 
 # ---------------- STYLE ----------------
