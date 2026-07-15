@@ -24,7 +24,7 @@ st.markdown(
     🏦 Loan Approval Prediction
     </h1>
     <p style='text-align:center;'>
-    Predict whether your loan will be approved using Machine Learning
+    Predict whether your loan will be approved or not
     </p>
     """,
     unsafe_allow_html=True
