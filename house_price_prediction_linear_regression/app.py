@@ -23,7 +23,7 @@ background:linear-gradient(90deg,#4F46E5,#7C3AED);'>
 </h1>
 """, unsafe_allow_html=True)
 
-st.write("### Enter the property details")
+st.write("### Enter the property details : ")
 
 # ---------------- BUTTON CSS ----------------
 st.markdown("""
@@ -51,16 +51,13 @@ st.sidebar.info(
 )
 
 # ---------------- KPI CARDS ----------------
-col1, col2, col3 = st.columns(3)
+col1, col2 = st.columns(2)
 
 with col1:
     st.metric("Average Area", "1500 sqft")
 
 with col2:
     st.metric("Average Price", "₹4.2M")
-
-with col3:
-    st.metric("Model Accuracy", "82%")
 
 st.divider()
 
