@@ -6,7 +6,7 @@ import os
 # ---------------- CONFIG ----------------
 
 st.set_page_config(
-    page_title="Student Performance AI",
+    page_title="Student Performance",
     page_icon="📖",
     layout="wide"
 )
