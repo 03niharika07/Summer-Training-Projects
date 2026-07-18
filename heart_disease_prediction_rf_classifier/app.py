@@ -327,8 +327,15 @@ if st.button("Predict Heart Disease"):
 
         st.markdown(
             f"""
-            <div class="prediction-box"
-            style="background:#ffcccc;color:#990000">
+        <div style="
+        background:#ffcccc;
+        color:#990000;
+        padding:25px;
+        border-radius:15px;
+        text-align:center;
+        font-size:25px;
+        font-weight:bold;
+        ">
 
             ⚠️ High Risk of Heart Disease
 
@@ -346,8 +353,15 @@ if st.button("Predict Heart Disease"):
 
         st.markdown(
             f"""
-            <div class="prediction-box"
-            style="background:#d8f3dc;color:#1b4332">
+        <div style="
+        background:#d8f3dc;
+        color:#1b4332;
+        padding:25px;
+        border-radius:15px;
+        text-align:center;
+        font-size:25px;
+        font-weight:bold;
+        ">
 
             ✅ Low Risk of Heart Disease
 
