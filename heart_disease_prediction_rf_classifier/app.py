@@ -60,7 +60,6 @@ model = joblib.load(path)
 st.markdown(
     """
     # ❤️ Heart Disease Prediction
-    ### Random Forest Classifier Based ML Application
     """
 )
 
