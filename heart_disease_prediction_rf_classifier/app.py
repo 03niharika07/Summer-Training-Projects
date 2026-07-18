@@ -6,110 +6,42 @@ import os
 st.set_page_config(
     page_title="Heart Disease Prediction",
     page_icon="❤️",
-    layout="wide"
+    layout="centered"
 )
 
+# REMOVE DEFAULT STREAMLIT MARGIN 
 
 st.markdown(
     """
     <style>
+        .block-container {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
 
-    /* Remove top space */
-    .block-container {
-        padding-top: 1rem;
-        padding-bottom: 2rem;
-    }
+        h1 {
+            text-align: center;
+            color: #d6336c;
+        }
 
+        .stButton>button {
+            width: 100%;
+            height: 3em;
+            border-radius: 10px;
+            font-size: 18px;
+            background-color: #d6336c;
+            color: white;
+        }
 
-    /* Main background */
-    .stApp {
-        background: linear-gradient(
-            135deg,
-            #fff5f5,
-            #f8f9ff
-        );
-    }
-
-
-    /* Title */
-    .main-title {
-        text-align:center;
-        font-size:45px;
-        font-weight:700;
-        color:#b30000;
-    }
-
-
-    .sub-title {
-        text-align:center;
-        font-size:20px;
-        color:#555;
-        margin-bottom:30px;
-    }
-
-
-    /* Card */
-    .card {
-
-        background:white;
-        padding:25px;
-        border-radius:20px;
-        box-shadow:0px 5px 20px rgba(0,0,0,0.08);
-        margin-bottom:20px;
-
-    }
-
-
-    /* Button */
-    div.stButton > button {
-
-        width:100%;
-        background:#d90429;
-        color:white;
-        font-size:20px;
-        font-weight:bold;
-        border-radius:12px;
-        height:3em;
-        border:none;
-
-    }
-
-
-    div.stButton > button:hover {
-
-        background:#9d0208;
-        color:white;
-
-    }
-
-
-    /* Prediction box */
-
-    .success-box {
-
-        background:#d8f3dc;
-        padding:20px;
-        border-radius:15px;
-        text-align:center;
-        font-size:25px;
-        font-weight:bold;
-        color:#1b4332;
-
-    }
-
-
-    .danger-box {
-
-        background:#ffccd5;
-        padding:20px;
-        border-radius:15px;
-        text-align:center;
-        font-size:25px;
-        font-weight:bold;
-        color:#9d0208;
-
-    }
-
+        .prediction-box {
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
 
     </style>
     """,
@@ -126,17 +58,10 @@ model = joblib.load(path)
 # TITLE
 
 st.markdown(
-"""
-<div class="main-title">
-❤️ Heart Disease Prediction
-</div>
-
-<div class="sub-title">
-Machine Learning Application using Random Forest Classifier
-</div>
-
-""",
-unsafe_allow_html=True
+    """
+    # ❤️ Heart Disease Prediction
+    ### Random Forest Classifier Based ML Application
+    """
 )
 
 
