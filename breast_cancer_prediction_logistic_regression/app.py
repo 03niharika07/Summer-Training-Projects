@@ -19,6 +19,7 @@ st.set_page_config(
     layout="wide"
 )
 
+# to remove default padding of streamlit
 st.markdown(
     """
     <style>
