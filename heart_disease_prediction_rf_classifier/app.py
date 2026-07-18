@@ -1,11 +1,10 @@
-
 import streamlit as st
 import pandas as pd
 import joblib
 import os
 
 
-# ---------------- PAGE CONFIG ----------------
+# ================= PAGE CONFIG =================
 
 st.set_page_config(
     page_title="Heart Disease Prediction",
@@ -14,70 +13,86 @@ st.set_page_config(
 )
 
 
-# ---------------- CUSTOM CSS ----------------
+# ================= CUSTOM CSS =================
 
 st.markdown(
     """
     <style>
 
+    /* Remove unnecessary Streamlit spacing */
     .block-container {
-        padding-top: 1rem;
+        padding-top: 2rem;
         padding-bottom: 2rem;
         padding-left: 3rem;
         padding-right: 3rem;
     }
 
 
+    /* Background */
     .stApp {
         background: linear-gradient(
             135deg,
             #fff5f5,
-            #f0f7ff
+            #f1f8ff
         );
     }
 
 
+    /* Main heading */
     .title {
+
         text-align:center;
         font-size:45px;
         font-weight:800;
-        color:#c1121f;
+        color:#b30000 !important;
+        margin-bottom:10px;
+
     }
 
 
+    /* Subtitle */
     .subtitle {
+
         text-align:center;
         font-size:20px;
-        color:#555;
-        margin-bottom:30px;
+        color:#444 !important;
+        margin-bottom:35px;
+
     }
 
+
+
+    /* Cards */
 
     .card {
 
         background:white;
         padding:25px;
         border-radius:20px;
-        box-shadow:0px 5px 20px rgba(0,0,0,0.08);
+        box-shadow:0px 5px 20px rgba(0,0,0,0.10);
         margin-bottom:20px;
 
     }
 
 
-    .section-title {
+
+    .section {
 
         font-size:25px;
         font-weight:700;
-        color:#c1121f;
+        color:#b30000 !important;
 
     }
 
 
+
+    /* Button */
+
     div.stButton > button {
 
         width:100%;
-        height:3em;
-        background:#c1121f;
+        height:3.2em;
+        background:#b30000;
         color:white;
         font-size:20px;
         font-weight:bold;
@@ -89,34 +104,48 @@ st.markdown(
 
     div.stButton > button:hover {
 
-        background:#780000;
+        background:#800000;
         color:white;
 
     }
 
 
+
+    /* Prediction boxes */
+
     .danger {
 
         background:#ffd6d6;
+        color:#8b0000;
         padding:25px;
         border-radius:20px;
         text-align:center;
-        font-size:25px;
+        font-size:26px;
         font-weight:bold;
-        color:#b00020;
 
     }
+
 
 
     .success {
 
         background:#d8f3dc;
+        color:#1b4332;
         padding:25px;
         border-radius:20px;
         text-align:center;
-        font-size:25px;
+        font-size:26px;
         font-weight:bold;
-        color:#1b4332;
+
+    }
+
+
+
+    /* Sidebar */
+
+    section[data-testid="stSidebar"] {
+
+        background:#fff5f5;
 
     }
 
@@ -129,46 +158,44 @@ st.markdown(
 
 
 
-# ---------------- LOAD MODEL ----------------
+# ================= LOAD MODEL =================
 
 path = os.path.join(os.path.dirname(__file__), "heart_disease_model.pkl")
 model = joblib.load(path)
 
 
+# ================= SIDEBAR =================
 
-# ---------------- SIDEBAR ----------------
 
 with st.sidebar:
-
-    st.image(
-        "https://cdn-icons-png.flaticon.com/512/3004/3004458.png",
-        width=120
-    )
 
     st.title("❤️ About Project")
 
     st.write(
         """
-        **Heart Disease Prediction System**
+        ### Heart Disease Prediction
 
-        Machine Learning model:
-        Random Forest Classifier
+        Machine Learning Model:
+        **Random Forest Classifier**
 
         Features:
-        - Patient Health Parameters
+        - Health Parameters
         - Lifestyle Factors
         - Medical History
 
-        Built using:
-        - Python
-        - Scikit-learn
-        - Streamlit
+        Built Using:
+
+        🐍 Python  
+        📊 Pandas  
+        🤖 Scikit-learn  
+        🎨 Streamlit
         """
     )
 
 
 
-# ---------------- HEADER ----------------
+# ================= HEADER =================
+
 
 st.markdown(
     """
@@ -177,7 +204,7 @@ st.markdown(
     </div>
 
     <div class="subtitle">
-    AI-powered healthcare risk assessment using Random Forest Classifier
+    AI-based healthcare risk prediction using Random Forest Classifier
     </div>
 
     """,
@@ -186,17 +213,15 @@ st.markdown(
 
 
 
-# ---------------- INPUT SECTION ----------------
+# ================= PERSONAL DETAILS =================
 
 
 st.markdown(
     """
     <div class="card">
-
-    <div class="section-title">
+    <div class="section">
     👤 Patient Information
     </div>
-
     </div>
     """,
     unsafe_allow_html=True
@@ -235,8 +260,8 @@ with col1:
     )
 
 
-with col2:
 
+with col2:
 
     Heart_Rate = st.number_input(
         "Heart Rate",
@@ -256,7 +281,6 @@ with col2:
     )
 
 
-
     Stress_Level = st.number_input(
         "Stress Level",
         value=5
@@ -264,24 +288,24 @@ with col2:
 
 
 
-# ---------------- LIFESTYLE ----------------
+# ================= MEDICAL DETAILS =================
 
 
 st.markdown(
     """
     <div class="card">
-
-    <div class="section-title">
-    🏃 Lifestyle & Medical History
+    <div class="section">
+    🩺 Lifestyle & Medical History
     </div>
-
     </div>
     """,
     unsafe_allow_html=True
 )
 
 
+
 col3, col4 = st.columns(2)
+
 
 
 with col3:
@@ -308,6 +332,7 @@ with col3:
         "Diabetes",
         ["Yes","No"]
     )
+
 
 
 with col4:
@@ -337,8 +362,7 @@ with col4:
 
 
 
-
-# ---------------- DATAFRAME ----------------
+# ================= INPUT DATA =================
 
 
 input_data = pd.DataFrame({
@@ -363,7 +387,7 @@ input_data = pd.DataFrame({
 
 
 
-# ---------------- PREDICTION ----------------
+# ================= PREDICTION =================
 
 
 st.write("")
@@ -376,12 +400,8 @@ if st.button("🔍 Predict Heart Disease Risk"):
 
     probability = model.predict_proba(input_data)
 
-
     confidence = max(probability[0])*100
 
-
-
-    st.write("")
 
 
     if prediction[0] == 1:
@@ -395,10 +415,9 @@ if st.button("🔍 Predict Heart Disease Risk"):
 
             <br><br>
 
-            Model Confidence: {confidence:.2f}%
+            Confidence: {confidence:.2f}%
 
             </div>
-
             """,
             unsafe_allow_html=True
         )
@@ -415,10 +434,9 @@ if st.button("🔍 Predict Heart Disease Risk"):
 
             <br><br>
 
-            Model Confidence: {confidence:.2f}%
+            Confidence: {confidence:.2f}%
 
             </div>
-
             """,
             unsafe_allow_html=True
         )
@@ -427,13 +445,17 @@ if st.button("🔍 Predict Heart Disease Risk"):
 
 st.markdown(
     """
-    ---
+    <br>
     <center>
     Built with ❤️ using Machine Learning & Streamlit
     </center>
     """,
     unsafe_allow_html=True
 )
+
+
+
+
 
 
 
