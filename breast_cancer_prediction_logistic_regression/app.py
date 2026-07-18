@@ -8,7 +8,7 @@ model = joblib.load("logr.pkl")
 scaler = joblib.load("scaler.pkl")
 
 
-# Page Configuration
+# Page configuration
 st.set_page_config(
     page_title="Breast Cancer Prediction",
     page_icon="🩺",
@@ -16,114 +16,157 @@ st.set_page_config(
 )
 
 
-# Title
 st.title("🩺 Breast Cancer Prediction")
 st.write(
-    "Enter tumor measurement values to predict whether the tumor is "
-    "Benign or Malignant using Logistic Regression."
+    "Predict whether a tumor is Benign or Malignant using Logistic Regression"
 )
 
 st.divider()
 
 
-# Feature names (same order as training dataset)
-features = [
-    'radius_mean',
-    'texture_mean',
-    'perimeter_mean',
-    'area_mean',
-    'smoothness_mean',
-    'compactness_mean',
-    'concavity_mean',
-    'concave points_mean',
-    'symmetry_mean',
-    'fractal_dimension_mean',
+# Feature ranges from dataset
+feature_ranges = {
 
-    'radius_se',
-    'texture_se',
-    'perimeter_se',
-    'area_se',
-    'smoothness_se',
-    'compactness_se',
-    'concavity_se',
-    'concave points_se',
-    'symmetry_se',
-    'fractal_dimension_se',
-
-    'radius_worst',
-    'texture_worst',
-    'perimeter_worst',
-    'area_worst',
-    'smoothness_worst',
-    'compactness_worst',
-    'concavity_worst',
-    'concave points_worst',
-    'symmetry_worst',
-    'fractal_dimension_worst'
-]
+    # Mean Features
+    "radius_mean": "6.98 - 28.11",
+    "texture_mean": "9.71 - 39.28",
+    "perimeter_mean": "43.79 - 188.5",
+    "area_mean": "143.5 - 2501",
+    "smoothness_mean": "0.052 - 0.163",
+    "compactness_mean": "0.019 - 0.345",
+    "concavity_mean": "0.0 - 0.427",
+    "concave points_mean": "0.0 - 0.201",
+    "symmetry_mean": "0.106 - 0.304",
+    "fractal_dimension_mean": "0.05 - 0.097",
 
 
-st.subheader("🔬 Enter Tumor Features")
+    # SE Features
+    "radius_se": "0.112 - 2.873",
+    "texture_se": "0.36 - 4.885",
+    "perimeter_se": "0.757 - 21.98",
+    "area_se": "6.802 - 542.2",
+    "smoothness_se": "0.001 - 0.031",
+    "compactness_se": "0.002 - 0.135",
+    "concavity_se": "0.0 - 0.396",
+    "concave points_se": "0.0 - 0.053",
+    "symmetry_se": "0.008 - 0.079",
+    "fractal_dimension_se": "0.001 - 0.03",
+
+
+    # Worst Features
+    "radius_worst": "7.93 - 36.04",
+    "texture_worst": "12.02 - 49.54",
+    "perimeter_worst": "50.41 - 251.2",
+    "area_worst": "185.2 - 4254",
+    "smoothness_worst": "0.071 - 0.223",
+    "compactness_worst": "0.027 - 1.058",
+    "concavity_worst": "0.0 - 1.252",
+    "concave points_worst": "0.0 - 0.291",
+    "symmetry_worst": "0.156 - 0.664",
+    "fractal_dimension_worst": "0.055 - 0.208"
+
+}
+
+
+# Features in same order as training
+features = list(feature_ranges.keys())
 
 
 input_values = []
 
 
-# Creating 3 columns for better UI
+# Function for input box
+
+def create_input(feature):
+
+    st.write(f"**{feature}**")
+    st.caption(
+        f"Allowed range: {feature_ranges[feature]}"
+    )
+
+    value = st.text_input(
+        label="",
+        placeholder="Enter value",
+        key=feature
+    )
+
+    return value
+
+
+
+# Mean Section
+st.subheader("📌 Mean Measurements")
+
 col1, col2, col3 = st.columns(3)
 
+mean_features = features[:10]
 
-for i, feature in enumerate(features):
+for i, feature in enumerate(mean_features):
 
-    if i % 3 == 0:
-        with col1:
-            value = st.text_input(
-                feature,
-                value="0.0",
-                key=feature
-            )
-
-    elif i % 3 == 1:
-        with col2:
-            value = st.text_input(
-                feature,
-                value="0.0",
-                key=feature
-            )
-
-    else:
-        with col3:
-            value = st.text_input(
-                feature,
-                value="0.0",
-                key=feature
-            )
-
-    input_values.append(value)
+    with [col1, col2, col3][i % 3]:
+        input_values.append(create_input(feature))
 
 
 
 st.divider()
 
 
-if st.button("🔍 Predict Result"):
+
+# SE Section
+st.subheader("📊 Standard Error Measurements")
+
+col1, col2, col3 = st.columns(3)
+
+se_features = features[10:20]
+
+for i, feature in enumerate(se_features):
+
+    with [col1, col2, col3][i % 3]:
+        input_values.append(create_input(feature))
+
+
+
+st.divider()
+
+
+
+# Worst Section
+st.subheader("⚠️ Worst Measurements")
+
+col1, col2, col3 = st.columns(3)
+
+worst_features = features[20:30]
+
+for i, feature in enumerate(worst_features):
+
+    with [col1, col2, col3][i % 3]:
+        input_values.append(create_input(feature))
+
+
+
+st.divider()
+
+
+
+# Prediction Button
+
+if st.button("🔍 Predict"):
 
     try:
 
-        # Convert text values into float
-        input_data = np.array(
+        data = np.array(
             [float(x) for x in input_values]
-        ).reshape(1, -1)
+        ).reshape(1,-1)
 
 
-        # Scaling input
-        input_scaled = scaler.transform(input_data)
+        # Scaling
+        data_scaled = scaler.transform(data)
 
 
         # Prediction
-        prediction = model.predict(input_scaled)
+        prediction = model.predict(data_scaled)
 
-        probability = model.predict_proba(input_scaled)
+        probability = model.predict_proba(data_scaled)
 
 
         if prediction[0] == 0:
@@ -144,6 +187,8 @@ if st.button("🔍 Predict Result"):
             )
 
 
-    except ValueError:
+    except:
 
-        st.warning("Please enter valid numerical values in all fields.")
+        st.warning(
+            "Please enter all feature values correctly."
+        )
