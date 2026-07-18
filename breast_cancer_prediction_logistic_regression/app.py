@@ -9,7 +9,7 @@ model_path = os.path.join(os.path.dirname(__file__), "logr.pkl")
 model = joblib.load(model_path)
 
 scaler_path = os.path.join(os.path.dirname(__file__), "scaler.pkl")
-model = joblib.load(scaler_path)
+scaler = joblib.load(scaler_path)
 
 
 # Page configuration
