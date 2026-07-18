@@ -13,77 +13,36 @@ st.set_page_config(
 )
 
 
-# ================= CUSTOM CSS =================
+# ================= CSS =================
 
 st.markdown(
     """
     <style>
 
-    /* Remove unnecessary Streamlit spacing */
+    /* Page background */
+    .stApp {
+        background: #f7f9fc;
+    }
+
+
+    /* Remove excess top gap */
     .block-container {
         padding-top: 2rem;
-        padding-bottom: 2rem;
         padding-left: 3rem;
         padding-right: 3rem;
     }
 
 
-    /* Background */
-    .stApp {
-        background: linear-gradient(
-            135deg,
-            #fff5f5,
-            #f1f8ff
-        );
-    }
-
-
-    /* Main heading */
-    .title {
-
-        text-align:center;
-        font-size:45px;
-        font-weight:800;
-        color:#b30000 !important;
-        margin-bottom:10px;
-
-    }
-
-
-    /* Subtitle */
-    .subtitle {
-
-        text-align:center;
-        font-size:20px;
-        color:#444 !important;
-        margin-bottom:35px;
-
-    }
-
-
-
-    /* Cards */
-
+    /* Input cards */
     .card {
 
         background:white;
         padding:25px;
-        border-radius:20px;
-        box-shadow:0px 5px 20px rgba(0,0,0,0.10);
+        border-radius:18px;
+        box-shadow:0px 4px 15px rgba(0,0,0,0.08);
         margin-bottom:20px;
 
     }
-
-
-
-    .section {
-
-        font-size:25px;
-        font-weight:700;
-        color:#b30000 !important;
-
-    }
-
 
 
     /* Button */
@@ -91,61 +50,48 @@ st.markdown(
     div.stButton > button {
 
         width:100%;
-        height:3.2em;
-        background:#b30000;
+        height:3.2rem;
+        background:#d90429;
         color:white;
         font-size:20px;
         font-weight:bold;
-        border-radius:15px;
-        border:none;
+        border-radius:12px;
 
     }
 
 
     div.stButton > button:hover {
 
-        background:#800000;
+        background:#9d0208;
         color:white;
 
     }
 
 
-
-    /* Prediction boxes */
+    /* Prediction */
 
     .danger {
 
-        background:#ffd6d6;
-        color:#8b0000;
+        background:#ffe5e5;
+        color:#b00020;
         padding:25px;
-        border-radius:20px;
+        border-radius:18px;
         text-align:center;
-        font-size:26px;
+        font-size:25px;
         font-weight:bold;
 
     }
-
 
 
     .success {
 
-        background:#d8f3dc;
+        background:#e0f7e9;
         color:#1b4332;
         padding:25px;
-        border-radius:20px;
+        border-radius:18px;
         text-align:center;
-        font-size:26px;
+        font-size:25px;
         font-weight:bold;
-
-    }
-
-
-
-    /* Sidebar */
-
-    section[data-testid="stSidebar"] {
-
-        background:#fff5f5;
 
     }
 
@@ -166,24 +112,25 @@ model = joblib.load(path)
 
 # ================= SIDEBAR =================
 
-
 with st.sidebar:
 
-    st.title("❤️ About Project")
+    st.markdown(
+        """
+        <h2 style="color:#d90429;">
+        ❤️ About Project
+        </h2>
+        """,
+        unsafe_allow_html=True
+    )
 
     st.write(
         """
-        ### Heart Disease Prediction
+        **Heart Disease Prediction**
 
-        Machine Learning Model:
-        **Random Forest Classifier**
+        Algorithm:
+        Random Forest Classifier
 
-        Features:
-        - Health Parameters
-        - Lifestyle Factors
-        - Medical History
-
-        Built Using:
+        Technologies:
 
         🐍 Python  
         📊 Pandas  
@@ -196,39 +143,46 @@ with st.sidebar:
 
 # ================= HEADER =================
 
+
 st.markdown(
     """
     <h1 style="
-        text-align:center;
-        color:#b30000 !important;
-        font-size:45px;
-        font-weight:800;
-        margin-top:20px;
-        margin-bottom:10px;">
-        ❤️ Heart Disease Prediction
+    text-align:center;
+    color:#d90429 !important;
+    font-size:45px;
+    font-weight:800;
+    margin-bottom:5px;">
+    ❤️ Heart Disease Prediction
     </h1>
 
 
     <p style="
-        text-align:center;
-        color:#333333 !important;
-        font-size:20px;
-        margin-bottom:40px;">
-        AI-based healthcare risk prediction using Random Forest Classifier
+    text-align:center;
+    color:#333333 !important;
+    font-size:20px;">
+    AI based healthcare risk prediction using Random Forest Classifier
     </p>
+
+    <br>
+
     """,
+
     unsafe_allow_html=True
 )
 
 
-# ================= PERSONAL DETAILS =================
+
+# ================= PATIENT DETAILS =================
+
 
 st.markdown(
     """
     <div class="card">
-    <div class="section">
+
+    <h2 style="color:#d90429;">
     👤 Patient Information
-    </div>
+    </h2>
+
     </div>
     """,
     unsafe_allow_html=True
@@ -243,9 +197,9 @@ with col1:
 
     Age = st.number_input(
         "Age",
-        min_value=1,
-        max_value=100,
-        value=40
+        1,
+        100,
+        40
     )
 
 
@@ -257,13 +211,17 @@ with col1:
 
     Cholesterol = st.number_input(
         "Cholesterol",
-        value=200
+        50,
+        400,
+        200
     )
 
 
     Blood_Pressure = st.number_input(
         "Blood Pressure",
-        value=120
+        50,
+        250,
+        120
     )
 
 
@@ -272,38 +230,48 @@ with col2:
 
     Heart_Rate = st.number_input(
         "Heart Rate",
-        value=80
+        40,
+        200,
+        80
     )
 
 
     Blood_Sugar = st.number_input(
         "Blood Sugar",
-        value=120
+        50,
+        400,
+        120
     )
 
 
     Exercise_Hours = st.number_input(
         "Exercise Hours",
-        value=3
+        0,
+        20,
+        3
     )
 
 
     Stress_Level = st.number_input(
         "Stress Level",
-        value=5
+        0,
+        10,
+        5
     )
 
 
 
-# ================= MEDICAL DETAILS =================
+# ================= LIFESTYLE =================
 
 
 st.markdown(
     """
     <div class="card">
-    <div class="section">
+
+    <h2 style="color:#d90429;">
     🩺 Lifestyle & Medical History
-    </div>
+    </h2>
+
     </div>
     """,
     unsafe_allow_html=True
@@ -316,6 +284,7 @@ col3, col4 = st.columns(2)
 
 
 with col3:
+
 
     Smoking = st.selectbox(
         "Smoking",
@@ -394,7 +363,7 @@ input_data = pd.DataFrame({
 
 
 
-# ================= PREDICTION =================
+# ================= PREDICT =================
 
 
 st.write("")
@@ -413,7 +382,6 @@ if st.button("🔍 Predict Heart Disease Risk"):
 
     if prediction[0] == 1:
 
-
         st.markdown(
             f"""
             <div class="danger">
@@ -422,7 +390,7 @@ if st.button("🔍 Predict Heart Disease Risk"):
 
             <br><br>
 
-            Confidence: {confidence:.2f}%
+            Confidence : {confidence:.2f}%
 
             </div>
             """,
@@ -432,7 +400,6 @@ if st.button("🔍 Predict Heart Disease Risk"):
 
     else:
 
-
         st.markdown(
             f"""
             <div class="success">
@@ -441,7 +408,7 @@ if st.button("🔍 Predict Heart Disease Risk"):
 
             <br><br>
 
-            Confidence: {confidence:.2f}%
+            Confidence : {confidence:.2f}%
 
             </div>
             """,
@@ -459,10 +426,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-
-
-
 
 
 
