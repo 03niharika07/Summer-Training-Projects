@@ -117,10 +117,9 @@ Smoking = st.selectbox(
 )
 
 
-Alcohol_Intake = st.number_input(
+Alcohol_Intake = st.selectbox(
     "Alcohol Intake",
-    min_value=0.0,
-    value=2.0
+    ["Low", "Medium", "High"]
 )
 
 
