@@ -19,58 +19,137 @@ st.markdown(
     """
     <style>
 
-    .block-container {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        padding-left: 3rem;
-        padding-right: 3rem;
-    }
+    /* Medical background */
+    [data-testid="stAppViewContainer"] {
 
-
-    .stApp {
         background: linear-gradient(
             135deg,
-            #fff5f5,
-            #f8f9ff
+            #eaf6ff 0%,
+            #ffffff 45%,
+            #ffeef0 100%
         );
+
     }
 
 
+    /* Main content spacing */
+    .block-container {
+
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        padding-left: 3rem;
+        padding-right: 3rem;
+
+    }
+
+
+    /* Heading */
     h1 {
+
         text-align:center;
-        color:#d6336c !important;
+        color:#0b5394 !important;
+        font-size:45px;
+        font-weight:800;
+
     }
 
 
-    .stButton>button {
+    /* Normal text */
+    p {
+
+        color:#333333 !important;
+
+    }
+
+
+    /* Input labels */
+    label {
+
+        color:#0b5394 !important;
+        font-weight:600;
+
+    }
+
+
+    /* Cards */
+    .card {
+
+        background:white;
+        padding:25px;
+        border-radius:20px;
+        box-shadow:0px 5px 18px rgba(0,0,0,0.08);
+        border-left:6px solid #0b5394;
+
+    }
+
+
+    /* Button */
+
+    .stButton > button {
 
         width:100%;
-        height:3em;
-        border-radius:10px;
-        font-size:18px;
-        background-color:#d6336c;
+        height:3.2rem;
+        background:#0b5394;
+        color:white;
+        font-size:20px;
+        font-weight:bold;
+        border-radius:15px;
+        border:none;
+
+    }
+
+
+    .stButton > button:hover {
+
+        background:#063970;
         color:white;
 
     }
 
 
-    .prediction-box {
+    /* Success result */
 
-        padding:20px;
-        border-radius:15px;
+    .success {
+
+        background:#e6ffed;
+        color:#176b3a;
+        padding:25px;
+        border-radius:20px;
         text-align:center;
-        font-size:22px;
+        font-size:25px;
         font-weight:bold;
 
     }
 
 
-    </style>
+    /* Danger result */
 
+    .danger {
+
+        background:#ffe6e6;
+        color:#b00020;
+        padding:25px;
+        border-radius:20px;
+        text-align:center;
+        font-size:25px;
+        font-weight:bold;
+
+    }
+
+
+    /* Sidebar */
+
+    section[data-testid="stSidebar"] {
+
+        background:#f0f8ff;
+
+    }
+
+
+    </style>
     """,
     unsafe_allow_html=True
 )
-
 
 
 # ---------------- LOAD MODEL ----------------
