@@ -1,11 +1,15 @@
 import streamlit as st
 import numpy as np
+import os
 import joblib
 
 
 # Load model and scaler
-model = joblib.load("logr.pkl")
-scaler = joblib.load("scaler.pkl")
+model_path = os.path.join(os.path.dirname(__file__), "logr.pkl")
+model = joblib.load(model_path)
+
+scaler_path = os.path.join(os.path.dirname(__file__), "scaler.pkl")
+model = joblib.load(scaler_path)
 
 
 # Page configuration
