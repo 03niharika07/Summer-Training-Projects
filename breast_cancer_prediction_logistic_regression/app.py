@@ -8,7 +8,7 @@ model = joblib.load("logr.pkl")
 scaler = joblib.load("scaler.pkl")
 
 
-# Page configuration
+# Page Configuration
 st.set_page_config(
     page_title="Breast Cancer Prediction",
     page_icon="🩺",
@@ -16,17 +16,17 @@ st.set_page_config(
 )
 
 
+# Title
 st.title("🩺 Breast Cancer Prediction")
 st.write(
-    "This application predicts whether a tumor is Benign or Malignant "
-    "using Logistic Regression."
+    "Enter tumor measurement values to predict whether the tumor is "
+    "Benign or Malignant using Logistic Regression."
 )
-
 
 st.divider()
 
 
-# Feature names (same order as training data)
+# Feature names (same order as training dataset)
 features = [
     'radius_mean',
     'texture_mean',
@@ -63,12 +63,13 @@ features = [
 ]
 
 
-st.subheader("Enter Tumor Measurements")
+st.subheader("🔬 Enter Tumor Features")
 
 
 input_values = []
 
 
+# Creating 3 columns for better UI
 col1, col2, col3 = st.columns(3)
 
 
@@ -76,13 +77,27 @@ for i, feature in enumerate(features):
 
     if i % 3 == 0:
         with col1:
-            value = st.number_input(feature, value=0.0)
+            value = st.text_input(
+                feature,
+                value="0.0",
+                key=feature
+            )
+
     elif i % 3 == 1:
         with col2:
-            value = st.number_input(feature, value=0.0)
+            value = st.text_input(
+                feature,
+                value="0.0",
+                key=feature
+            )
+
     else:
         with col3:
-            value = st.number_input(feature, value=0.0)
+            value = st.text_input(
+                feature,
+                value="0.0",
+                key=feature
+            )
 
     input_values.append(value)
 
@@ -91,31 +106,44 @@ for i, feature in enumerate(features):
 st.divider()
 
 
-if st.button("🔍 Predict"):
+if st.button("🔍 Predict Result"):
 
-    # Convert input into array
-    input_data = np.array(input_values).reshape(1, -1)
+    try:
 
-
-    # Scaling input
-    input_scaled = scaler.transform(input_data)
-
-
-    # Prediction
-    prediction = model.predict(input_scaled)
+        # Convert text values into float
+        input_data = np.array(
+            [float(x) for x in input_values]
+        ).reshape(1, -1)
 
 
-    probability = model.predict_proba(input_scaled)
+        # Scaling input
+        input_scaled = scaler.transform(input_data)
 
 
-    if prediction[0] == 0:
-        st.error("⚠️ Malignant Tumor Detected")
-        st.write(
-            f"Probability of Malignant: {probability[0][0]*100:.2f}%"
-        )
+        # Prediction
+        prediction = model.predict(input_scaled)
 
-    else:
-        st.success("✅ Benign Tumor Detected")
-        st.write(
-            f"Probability of Benign: {probability[0][1]*100:.2f}%"
-        )
+        probability = model.predict_proba(input_scaled)
+
+
+        if prediction[0] == 0:
+
+            st.error("⚠️ Malignant Tumor Detected")
+
+            st.write(
+                f"Malignant Probability: {probability[0][0]*100:.2f}%"
+            )
+
+
+        else:
+
+            st.success("✅ Benign Tumor Detected")
+
+            st.write(
+                f"Benign Probability: {probability[0][1]*100:.2f}%"
+            )
+
+
+    except ValueError:
+
+        st.warning("Please enter valid numerical values in all fields.")
