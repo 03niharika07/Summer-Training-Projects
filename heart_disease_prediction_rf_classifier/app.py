@@ -19,20 +19,26 @@ st.markdown(
     """
     <style>
 
-    /* Medical background */
+    /* Full dark background */
     [data-testid="stAppViewContainer"] {
 
         background: linear-gradient(
             135deg,
-            #eaf6ff 0%,
-            #ffffff 45%,
-            #ffeef0 100%
+            #0f172a,
+            #111827
         );
 
     }
 
 
-    /* Main content spacing */
+    /* Main container */
+    [data-testid="stMainBlockContainer"] {
+
+        background: transparent;
+
+    }
+
+
     .block-container {
 
         padding-top: 2rem;
@@ -47,26 +53,36 @@ st.markdown(
     h1 {
 
         text-align:center;
-        color:#0b5394 !important;
+        color:#38bdf8 !important;
         font-size:45px;
         font-weight:800;
 
     }
 
 
-    /* Normal text */
-    p {
+    /* All text */
+    p, label {
 
-        color:#333333 !important;
+        color:#e5e7eb !important;
 
     }
 
 
     /* Input labels */
-    label {
+    .stSelectbox label,
+    .stNumberInput label {
 
-        color:#0b5394 !important;
+        color:#93c5fd !important;
         font-weight:600;
+
+    }
+
+
+    /* Input boxes */
+    input {
+
+        background-color:#1f2937 !important;
+        color:white !important;
 
     }
 
@@ -74,45 +90,42 @@ st.markdown(
     /* Cards */
     .card {
 
-        background:white;
+        background:#1e293b;
         padding:25px;
         border-radius:20px;
-        box-shadow:0px 5px 18px rgba(0,0,0,0.08);
-        border-left:6px solid #0b5394;
+        box-shadow:0px 5px 20px rgba(0,0,0,0.4);
 
     }
 
 
     /* Button */
-
     .stButton > button {
 
         width:100%;
-        height:3.2rem;
-        background:#0b5394;
+        height:3rem;
+        background:#0ea5e9;
         color:white;
         font-size:20px;
         font-weight:bold;
         border-radius:15px;
-        border:none;
 
     }
 
 
     .stButton > button:hover {
 
-        background:#063970;
+        background:#0284c7;
         color:white;
 
     }
 
 
-    /* Success result */
+    /* Success box */
 
     .success {
 
-        background:#e6ffed;
-        color:#176b3a;
+        background:#064e3b;
+        color:#bbf7d0;
         padding:25px;
         border-radius:20px;
         text-align:center;
@@ -122,12 +135,12 @@ st.markdown(
     }
 
 
-    /* Danger result */
+    /* Danger box */
 
     .danger {
 
-        background:#ffe6e6;
-        color:#b00020;
+        background:#450a0a;
+        color:#fecaca;
         padding:25px;
         border-radius:20px;
         text-align:center;
@@ -141,7 +154,7 @@ st.markdown(
 
     section[data-testid="stSidebar"] {
 
-        background:#f0f8ff;
+        background:#020617;
 
     }
 
@@ -150,7 +163,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 
 # ---------------- LOAD MODEL ----------------
 
