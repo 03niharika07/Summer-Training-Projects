@@ -149,9 +149,11 @@ Obesity = st.selectbox(
 )
 
 
-Stress_Level = st.selectbox(
+Stress_Level = st.number_input(
     "Stress Level",
-    ["Low", "Medium", "High"]
+    min_value=0,
+    max_value=10,
+    value=5
 )
 
 
