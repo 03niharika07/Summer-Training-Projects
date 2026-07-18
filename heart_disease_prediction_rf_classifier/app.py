@@ -196,25 +196,32 @@ with st.sidebar:
 
 # ================= HEADER =================
 
-
 st.markdown(
     """
-    <div class="title">
-    ❤️ Heart Disease Prediction
-    </div>
+    <h1 style="
+        text-align:center;
+        color:#b30000 !important;
+        font-size:45px;
+        font-weight:800;
+        margin-top:20px;
+        margin-bottom:10px;">
+        ❤️ Heart Disease Prediction
+    </h1>
 
-    <div class="subtitle">
-    AI-based healthcare risk prediction using Random Forest Classifier
-    </div>
 
+    <p style="
+        text-align:center;
+        color:#333333 !important;
+        font-size:20px;
+        margin-bottom:40px;">
+        AI-based healthcare risk prediction using Random Forest Classifier
+    </p>
     """,
     unsafe_allow_html=True
 )
 
 
-
 # ================= PERSONAL DETAILS =================
-
 
 st.markdown(
     """
