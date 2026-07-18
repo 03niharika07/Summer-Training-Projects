@@ -325,8 +325,8 @@ if st.button("Predict Heart Disease"):
 
     if prediction[0] == 1:
 
-        st.markdown(
-            f"""
+     st.markdown(
+        f"""
         <div style="
         background:#ffcccc;
         color:#990000;
@@ -337,22 +337,22 @@ if st.button("Predict Heart Disease"):
         font-weight:bold;
         ">
 
-            ⚠️ High Risk of Heart Disease
+        ⚠️ High Risk of Heart Disease
 
-            <br><br>
+        <br><br>
 
-            Confidence: {confidence:.2f}%
+        Confidence: {confidence:.2f}%
 
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
     else:
 
-        st.markdown(
-            f"""
+     st.markdown(
+        f"""
         <div style="
         background:#d8f3dc;
         color:#1b4332;
@@ -363,16 +363,16 @@ if st.button("Predict Heart Disease"):
         font-weight:bold;
         ">
 
-            ✅ Low Risk of Heart Disease
+        ✅ Low Risk of Heart Disease
 
-            <br><br>
+        <br><br>
 
-            Confidence: {confidence:.2f}%
+        Confidence: {confidence:.2f}%
 
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
 
