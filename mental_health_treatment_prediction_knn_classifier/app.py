@@ -404,14 +404,3 @@ if st.button("🔍 Predict"):
         unsafe_allow_html=True
         )
 
-
-
-st.markdown(
-"""
-<br><br>
-<center>
-Made using Machine Learning | KNN Classifier
-</center>
-""",
-unsafe_allow_html=True
-)
