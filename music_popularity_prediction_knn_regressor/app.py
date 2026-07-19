@@ -2,90 +2,95 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# Load files
+# Load Files
 model = joblib.load("knn_model.pkl")
 scaler = joblib.load("scaler.pkl")
 feature_columns = joblib.load("feature_columns.pkl")
 label_encoder = joblib.load("label_encoder.pkl")
 
+# Page Config
 st.set_page_config(
     page_title="Music Popularity Prediction",
     page_icon="🎵",
     layout="centered"
 )
 
+# Main Page
 st.title("🎵 Music Popularity Prediction")
-st.write("Predict Spotify Song Popularity using KNN Regressor")
+st.markdown(
+    "Predict the popularity score of a Spotify track using **KNN Regressor**."
+)
 
-# USER INPUTS
+# Sidebar
+st.sidebar.header("🎧 Song Features")
 
-duration_ms = st.number_input(
+duration_ms = st.sidebar.number_input(
     "Duration (ms)",
     min_value=0,
     value=200000
 )
 
-explicit_input = st.selectbox(
+explicit_input = st.sidebar.selectbox(
     "Explicit Content",
     ["False", "True"]
 )
 
-danceability = st.slider(
+danceability = st.sidebar.slider(
     "Danceability",
     0.0, 1.0, 0.50
 )
 
-energy = st.slider(
+energy = st.sidebar.slider(
     "Energy",
     0.0, 1.0, 0.50
 )
 
-key = st.selectbox(
+key = st.sidebar.selectbox(
     "Key",
     list(range(12))
 )
 
-loudness = st.number_input(
+loudness = st.sidebar.number_input(
     "Loudness",
     value=-10.0
 )
 
-mode = st.selectbox(
+mode = st.sidebar.selectbox(
     "Mode",
     [0, 1]
 )
 
-speechiness = st.slider(
+speechiness = st.sidebar.slider(
     "Speechiness",
     0.0, 1.0, 0.10
 )
 
-acousticness = st.slider(
+acousticness = st.sidebar.slider(
     "Acousticness",
     0.0, 1.0, 0.50
 )
 
-instrumentalness = st.slider(
+instrumentalness = st.sidebar.slider(
     "Instrumentalness",
     0.0, 1.0, 0.00
 )
 
-liveness = st.slider(
+liveness = st.sidebar.slider(
     "Liveness",
     0.0, 1.0, 0.20
 )
 
-valence = st.slider(
+valence = st.sidebar.slider(
     "Valence",
     0.0, 1.0, 0.50
 )
 
-tempo = st.number_input(
+tempo = st.sidebar.number_input(
     "Tempo",
     value=120.0
 )
 
-time_signature = st.selectbox(
+time_signature = st.sidebar.selectbox(
     "Time Signature",
     [3, 4, 5]
 )
@@ -116,14 +121,17 @@ genre_list = [
     "trance","trip-hop","turkish","world-music"
 ]
 
-genre = st.selectbox(
+genre = st.sidebar.selectbox(
     "Track Genre",
     genre_list
 )
 
-# PREDICTION
+st.sidebar.markdown("---")
 
-if st.button("Predict Popularity"):
+predict_btn = st.sidebar.button("🎯 Predict Popularity")
+
+# Prediction
+if predict_btn:
 
     explicit = label_encoder.transform([explicit_input])[0]
 
@@ -158,5 +166,5 @@ if st.button("Predict Popularity"):
     prediction = model.predict(input_scaled)[0]
 
     st.success(
-        f"🎯 Predicted Popularity Score: {prediction:.2f}/100"
+        f"🎵 Predicted Popularity Score: {prediction:.2f}/100"
     )
