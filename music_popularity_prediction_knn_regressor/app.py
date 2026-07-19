@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import os
 
 # PAGE CONFIG
 st.set_page_config(
@@ -10,10 +11,17 @@ st.set_page_config(
 )
 
 # LOAD FILES
-model = joblib.load("knn_model.pkl")
-scaler = joblib.load("scaler.pkl")
-feature_columns = joblib.load("feature_columns.pkl")
-label_encoder = joblib.load("label_encoder.pkl")
+model_path = os.path.join(os.path.dirname(__file__), "knn_model.pkl")
+model = joblib.load(model_path)
+
+scaler_path = os.path.join(os.path.dirname(__file__), "scaler.pkl")
+scaler = joblib.load(scaler_path)
+
+feature_path = os.path.join(os.path.dirname(__file__), "feature_columns.pkl")
+feature_columns = joblib.load(feature_path)
+
+encoder_path = os.path.join(os.path.dirname(__file__), "label_encoder.pkl")
+label_encoder = joblib.load(encoder_path)
 
 # HEADER
 st.title("🎵 Spotify Music Popularity Predictor")
