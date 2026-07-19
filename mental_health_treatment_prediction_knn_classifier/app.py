@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import os
 
 
 # ---------------- PAGE CONFIG ----------------
@@ -134,8 +135,8 @@ color:white;
 
 # ---------------- LOAD MODEL ----------------
 
-model = joblib.load("mental_health_knn.pkl")
-
+model_path = os.path.join(os.path.dirname(__file__), "mental_health_knn.pkl")
+model = joblib.load(model_path)
 
 
 # ---------------- TITLE ----------------
