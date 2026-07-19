@@ -145,7 +145,7 @@ st.title("🧠 Mental Health Treatment Prediction")
 
 st.markdown(
 """
-AI-powered prediction system using **K-Nearest Neighbors (KNN) Algorithm**  
+Prediction system using **K-Nearest Neighbors (KNN) Algorithm**  
 to analyze workplace and personal factors.
 """
 )
