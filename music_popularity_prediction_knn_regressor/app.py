@@ -2,27 +2,27 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# Load Files
+# PAGE CONFIG
+st.set_page_config(
+    page_title="Spotify Popularity Predictor",
+    page_icon="🎵",
+    layout="wide"
+)
+
+# LOAD FILES
 model = joblib.load("knn_model.pkl")
 scaler = joblib.load("scaler.pkl")
 feature_columns = joblib.load("feature_columns.pkl")
 label_encoder = joblib.load("label_encoder.pkl")
 
-# Page Config
-st.set_page_config(
-    page_title="Music Popularity Prediction",
-    page_icon="🎵",
-    layout="centered"
-)
+# HEADER
+st.title("🎵 Spotify Music Popularity Predictor")
+st.markdown("""
+Predict the popularity score of a Spotify track using a **K-Nearest Neighbors Regressor (K=25)** trained on Spotify audio features.
+""")
 
-# Main Page
-st.title("🎵 Music Popularity Prediction")
-st.markdown(
-    "Predict the popularity score of a Spotify track using **KNN Regressor**."
-)
-
-# Sidebar
-st.sidebar.header("🎧 Song Features")
+# SIDEBAR
+st.sidebar.title("🎧 Song Features")
 
 duration_ms = st.sidebar.number_input(
     "Duration (ms)",
@@ -130,7 +130,26 @@ st.sidebar.markdown("---")
 
 predict_btn = st.sidebar.button("🎯 Predict Popularity")
 
-# Prediction
+st.sidebar.info(
+    "Fill the song details and click Predict Popularity."
+)
+
+# MAIN CONTENT
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("📊 Model Information")
+    st.write("Algorithm: K-Nearest Neighbors Regressor")
+    st.write("Optimal K Value: 25")
+    st.write("Dataset: Spotify Tracks Dataset")
+
+with col2:
+    st.subheader("📈 Model Performance")
+    st.write("R² Score: 0.306")
+    st.write("RMSE: 18.51")
+    st.write("MAE: 13.12")
+
+# PREDICTION
 if predict_btn:
 
     explicit = label_encoder.transform([explicit_input])[0]
@@ -165,6 +184,18 @@ if predict_btn:
 
     prediction = model.predict(input_scaled)[0]
 
-    st.success(
-        f"🎵 Predicted Popularity Score: {prediction:.2f}/100"
+    st.markdown("---")
+
+    st.subheader("🎯 Prediction Result")
+
+    st.metric(
+        label="Predicted Popularity Score",
+        value=f"{prediction:.2f}/100"
     )
+
+    if prediction >= 70:
+        st.success("🔥 This track has high predicted popularity!")
+    elif prediction >= 40:
+        st.warning("🎶 This track has moderate predicted popularity.")
+    else:
+        st.error("📉 This track has low predicted popularity.")
