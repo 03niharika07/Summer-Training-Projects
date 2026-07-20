@@ -4,6 +4,7 @@ import numpy as np
 import joblib
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
 
 
 # PAGE CONFIG
@@ -17,8 +18,10 @@ st.set_page_config(
 
 # LOAD MODEL 
 
-kmeans = joblib.load("kmeans.pkl")
-scaler = joblib.load("scaler.pkl")
+model_path = os.path.join(os.path.dirname(__file__), "kmeans.pkl")
+kmeans = joblib.load(model_path)
+scaler_path = os.path.join(os.path.dirname(__file__), "scaler.pkl")
+scaler = joblib.load(scaler_path)
 
 
 # LOAD DATA
