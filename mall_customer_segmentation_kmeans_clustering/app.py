@@ -26,7 +26,12 @@ scaler = joblib.load(scaler_path)
 
 # LOAD DATA
 
-df = pd.read_csv("Mall_Customers.csv")
+file_path = os.path.join(
+    os.path.dirname(__file__),
+    "Mall_Customers.csv"
+)
+
+df = pd.read_csv(file_path)
 
 df.drop("CustomerID", axis=1, inplace=True)
 
