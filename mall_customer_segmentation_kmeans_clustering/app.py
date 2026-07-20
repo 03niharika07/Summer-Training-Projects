@@ -212,11 +212,13 @@ with col2:
 
 st.subheader("📌 Cluster Summary")
 
-
 summary = df.groupby("Cluster").mean(numeric_only=True)
+
+# Convert encoded gender into readable format
+summary["Gender"] = summary["Gender"].apply(
+    lambda x: "Female" if x >= 0.5 else "Male"
+)
 
 summary["Customer Segment"] = summary.index.map(cluster_names)
 
-st.dataframe(
-    summary
-)
+st.dataframe(summary)
