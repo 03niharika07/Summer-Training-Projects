@@ -3,21 +3,22 @@ import pandas as pd
 import joblib
 
 
-# Load Model
+# ---------------- LOAD MODEL ----------------
 
 model = joblib.load("traffic_svr_model.pkl")
 
 
-# Load Dataset for Dropdown Values
+# Load dataset for dropdowns and distance
 
 data = pd.read_csv("delhi_traffic_features.csv")
 
-start_locations = sorted(data['start_area'].unique())
 
-end_locations = sorted(data['end_area'].unique())
+start_locations = sorted(data["start_area"].unique())
+
+end_locations = sorted(data["end_area"].unique())
 
 
-# Page Configuration
+# ---------------- PAGE CONFIG ----------------
 
 st.set_page_config(
     page_title="Traffic-Aware Travel Time Prediction",
@@ -26,55 +27,90 @@ st.set_page_config(
 )
 
 
-# Sidebar
+# ---------------- SIDEBAR ----------------
 
-st.sidebar.title("🚦 Model Performance")
+st.sidebar.title("🚦 Traffic-Aware Prediction")
 
-st.sidebar.write("### Support Vector Regression Metrics")
+st.sidebar.write(
+    """
+    ### Model Overview
 
-
-st.sidebar.metric(
-    "MAE",
-    "6.37 minutes"
-)
-
-st.sidebar.metric(
-    "RMSE",
-    "9.19 minutes"
-)
-
-st.sidebar.metric(
-    "R² Score",
-    "90.5%"
+    This application predicts the estimated 
+    travel time using traffic and route 
+    related information.
+    """
 )
 
 
 st.sidebar.divider()
 
 
-st.sidebar.info(
+st.sidebar.subheader("📊 Model Performance")
+
+
+st.sidebar.metric(
+    label="Mean Absolute Error (MAE)",
+    value="6.37 min"
+)
+
+st.sidebar.caption(
+    "Average prediction error of the model"
+)
+
+
+st.sidebar.metric(
+    label="Root Mean Squared Error (RMSE)",
+    value="9.19 min"
+)
+
+st.sidebar.caption(
+    "Measures larger prediction errors"
+)
+
+
+st.sidebar.metric(
+    label="R² Score",
+    value="90.5%"
+)
+
+st.sidebar.caption(
+    "Model explains 90.5% variation in travel time"
+)
+
+
+st.sidebar.divider()
+
+
+st.sidebar.subheader("🤖 Algorithm")
+
+st.sidebar.write(
     """
-    **Algorithm Used:**
-    Support Vector Regression (SVR)
+    **Support Vector Regression (SVR)**
 
-    **Target:**
-    Travel Time (minutes)
+    Used for predicting continuous values
+    like travel time in minutes.
+    """
+)
 
-    **Features Used:**
 
-    • Start Area
-    • End Area
-    • Distance
-    • Time of Day
-    • Day of Week
-    • Weather Condition
-    • Traffic Density Level
+st.sidebar.subheader("📌 Input Features")
+
+st.sidebar.write(
+    """
+    • Starting Area  
+    • Destination Area  
+    • Distance  
+    • Time of Day  
+    • Day of Week  
+    • Weather Condition  
+    • Traffic Density  
     • Road Type
     """
 )
 
 
-# Main Heading
+
+# ---------------- MAIN PAGE ----------------
 
 st.title(
     "🚦 Traffic-Aware Travel Time Prediction Using Support Vector Regression (SVR)"
@@ -82,14 +118,16 @@ st.title(
 
 
 st.write(
-    "Estimate journey duration based on traffic conditions and route information."
+    "Estimate the time required to reach your destination based on traffic and route conditions."
 )
 
 
 st.divider()
 
 
-# Input Section
+
+# ---------------- INPUT SECTION ----------------
+
 
 col1, col2 = st.columns(2)
 
@@ -108,23 +146,33 @@ with col1:
     )
 
 
-    route_data = data[
-    (data['start_area'] == start_area) &
-    (data['end_area'] == end_area)
-]
+    # Finding distance automatically
+
+    route = data[
+        (data["start_area"] == start_area) &
+        (data["end_area"] == end_area)
+    ]
 
 
-if not route_data.empty:
-    distance = route_data['distance_km'].iloc[0]
-    
-    st.write(
-        f"📏 Distance: {distance} km"
-    )
+    if not route.empty:
 
-else:
-    distance = 0
-    st.warning("Distance information not available")
+        distance = route["distance_km"].iloc[0]
 
+        st.info(
+            f"📏 Route Distance: {distance} km"
+        )
+
+    else:
+
+        distance = 0
+
+        st.warning(
+            "Distance not available for this route"
+        )
+
+
+
+with col2:
 
     time_of_day = st.selectbox(
         "🕒 Time of Day",
@@ -136,8 +184,6 @@ else:
         ]
     )
 
-
-with col2:
 
     day_of_week = st.selectbox(
         "📅 Day of Week",
@@ -173,22 +219,28 @@ with col2:
     )
 
 
-    road_type = st.selectbox(
-        "🛣 Road Type",
-        [
-            "Highway",
-            "Main Road",
-            "Street"
-        ]
-    )
+road_type = st.selectbox(
+    "🛣 Road Type",
+    [
+        "Highway",
+        "Main Road",
+        "Street"
+    ]
+)
+
 
 
 st.divider()
 
 
-# Prediction
 
-if st.button("🚗 Predict Travel Time"):
+# ---------------- PREDICTION ----------------
+
+
+if st.button(
+    "🚗 Predict Travel Time",
+    use_container_width=True
+):
 
 
     input_data = pd.DataFrame(
