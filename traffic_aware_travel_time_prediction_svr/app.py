@@ -12,8 +12,11 @@ model = joblib.load(model_path)
 
 # Load dataset for dropdowns and distance
 
-data = pd.read_csv("delhi_traffic_features.csv")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+data = pd.read_csv(
+    os.path.join(BASE_DIR, "delhi_traffic_features.csv")
+)
 
 start_locations = sorted(data["start_area"].unique())
 
