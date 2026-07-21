@@ -26,8 +26,8 @@ with st.sidebar:
         """
         ### About Project
         
-        This application predicts whether a credit card transaction 
-        is fraudulent or normal using Support Vector Classifier (SVC).
+        This application predicts whether a credit card 
+        transaction is fraudulent or normal using SVC.
         """
     )
 
@@ -37,9 +37,9 @@ with st.sidebar:
 
     st.write("""
     **Algorithm:**  
-    Support Vector Classifier
+    Support Vector Classifier (SVC)
 
-    **Problem Type:**  
+    **Type:**  
     Binary Classification
 
     **Classes:**
@@ -49,19 +49,35 @@ with st.sidebar:
 
     st.divider()
 
-    st.subheader("📊 Evaluation Metrics")
+    st.subheader("📊 Model Performance")
 
-    st.write("""
-    - Accuracy
-    - Precision
-    - Recall
-    - F1 Score
-    - ROC-AUC Score
-    """)
+    st.metric(
+        label="Accuracy",
+        value="98.9%"
+    )
+
+    st.metric(
+        label="Precision",
+        value="61.54%"
+    )
+
+    st.metric(
+        label="Recall",
+        value="77.42%"
+    )
+
+    st.metric(
+        label="F1 Score",
+        value="68.57%"
+    )
+
+    st.metric(
+        label="ROC-AUC Score",
+        value="99.22%"
+    )
+
 
     st.divider()
-
-    st.caption("Built using Python & Machine Learning")
 
 
 # ---------------- Main Page ----------------
