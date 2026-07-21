@@ -2,15 +2,19 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import joblib
+import os
 
 
 # ---------------- Load Model Files ----------------
 
-model = joblib.load("svc_model.pkl")
-scaler = joblib.load("scaler.pkl")
-features = joblib.load("features.pkl")
+model_path = os.path.join(os.path.dirname(__file__), "svc_model.pkl")
+model = joblib.load(model_path)
 
+scaler_path = os.path.join(os.path.dirname(__file__), "scaler.pkl")
+scaler = joblib.load(scaler_path)
 
+feature_path = os.path.join(os.path.dirname(__file__), "features.pkl")
+features = joblib.load(feature_path)
 
 # ---------------- Page Configuration ----------------
 
