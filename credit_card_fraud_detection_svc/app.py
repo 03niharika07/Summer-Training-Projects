@@ -36,12 +36,12 @@ transaction_hour = st.number_input(
 
 foreign_transaction = st.selectbox(
     "Foreign Transaction",
-    [0, 1]
+    ['False', 'True']
 )
 
 location_mismatch = st.selectbox(
     "Location Mismatch",
-    [0, 1]
+    ['False', 'True']
 )
 
 device_trust_score = st.number_input(
