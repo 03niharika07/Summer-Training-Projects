@@ -1,11 +1,14 @@
 import streamlit as st
 import numpy as np
 import joblib
+import os
 
 
 # Load Model and Scaler
-model = joblib.load("svc_model.pkl")
-scaler = joblib.load("scaler.pkl")
+path = os.path.join(os.path.dirname(__file__), "svc_model.pkl")
+model = joblib.load(path)
+scaler_path = os.path.join(os.path.dirname(__file__), "scaler.pkl")
+scaler = joblib.load(path)
 
 
 # Page Configuration
