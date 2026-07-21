@@ -1,11 +1,13 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import os
 
 
 # ---------------- LOAD MODEL ----------------
 
-model = joblib.load("traffic_svr_model.pkl")
+model_path = os.path.join(os.path.dirname(__file__), "traffic_svr_model.pkl")
+model = joblib.load(model_path)
 
 
 # Load dataset for dropdowns and distance
